@@ -59,8 +59,7 @@ class  Game extends Component {
         else if (sum == -3){
           return -1;
         }
-        
-
+ 
         // Check columns..
         for (let i = 0; i < numOfCells; i++) {
           sum = arr[0][i] + arr[1][i] + arr[2][i];
@@ -71,6 +70,8 @@ class  Game extends Component {
             return -1;
           }
         
+
+        
           // Check left diagnol.. 
           sum = arr[0][0] + arr[1][1] + arr[2][2];
           if (sum == 3) {
@@ -79,9 +80,10 @@ class  Game extends Component {
             else if (sum == -3){
               return -1;
             }
+      
 
                // Check right diagnol.. 
-          sum = arr[2][0] + arr[1][0] + arr[0][2];
+          sum = arr[2][0] + arr[1][1] + arr[0][2];
           if (sum == 3) {
             return 1;
             }
@@ -90,7 +92,7 @@ class  Game extends Component {
             }
 
             // Check if there are no winners..
-            return 0;
+           else return 0;
           
         }
       }
@@ -125,7 +127,8 @@ class  Game extends Component {
         Alert.alert("Player 2 is the WINNER 🏆🎉👏🏼 ");
         this.initializeGame();
       }
-
+        // else return this.initializeGame();
+ 
   }
 
   newGame =()=>{
@@ -136,7 +139,9 @@ renderIcon=(row, column)=>{
   let val = this.state.gameState[row][column];
   switch (val) {
     case 1: return  <IconX name='md-close' style={styles.cellX} />
-    case -1 : return <IconO name='circle-outline' style={styles.cellO} />
+    
+    case -1 : return <IconO name='circle-outline' style={styles.cellO} /> 
+     
     default: return <View />
   }
 }
