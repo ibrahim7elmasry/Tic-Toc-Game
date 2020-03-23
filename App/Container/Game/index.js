@@ -14,7 +14,7 @@ import styles from './styles';
 import IconX from 'react-native-vector-icons/Ionicons'
 import IconO from 'react-native-vector-icons/MaterialCommunityIcons'
 const IS_IOS = Platform.OS === 'ios'
-let iconType = IS_IOS ? 'ios' : 'md'
+var iconType = IS_IOS ? 'ios' : 'md'
 
 class  Game extends Component {
   constructor(props){
@@ -29,7 +29,7 @@ class  Game extends Component {
     }
   }
   componentDidMount =()=>{
-    this.initializeGame();
+    this.initializeGame(); // to begin new game
   }
 
     initializeGame() {
@@ -47,49 +47,31 @@ class  Game extends Component {
     winnerPlayer =()=>{
       // return 1 if Player number 1 won ... return -1 if player number 2 won ... return 0 if no one has won
       const numOfCells = 3;
-      let arr = this.state.gameState;
-      let sum;
+      var arr = this.state.gameState;
+      var sum;
 
       // Check rows..
-      for (let i = 0; i < numOfCells; i++) {
+      for (var i = 0; i < numOfCells; i++) {
         sum = arr[i][0] + arr[i][1] + arr[i][2];
-        if(sum == 3){
-          return 1;
-        }
-        else if (sum == -3){
-          return -1;
-        }
+        if(sum == 3){  return 1;}
+        else if (sum == -3){ return -1;  }
  
         // Check columns..
-        for (let i = 0; i < numOfCells; i++) {
-          sum = arr[0][i] + arr[1][i] + arr[2][i];
-          if (sum == 3) {
-          return 1;
-          }
-          else if (sum == -3){
-            return -1;
-          }
-        
+        for (var j = 0; j < numOfCells; j++) {
+          sum = arr[0][j] + arr[1][j] + arr[2][j];
+          if (sum == 3) { return 1;   }
+          else if (sum == -3){return -1; }
 
-        
-          // Check left diagnol.. 
+          // Check left diagonal.. 
           sum = arr[0][0] + arr[1][1] + arr[2][2];
-          if (sum == 3) {
-            return 1;
-            }
-            else if (sum == -3){
-              return -1;
-            }
+          if (sum == 3) { return 1; }
+            else if (sum == -3){ return -1;  }
       
 
-               // Check right diagnol.. 
+               // Check right diagonal.. 
           sum = arr[2][0] + arr[1][1] + arr[0][2];
-          if (sum == 3) {
-            return 1;
-            }
-            else if (sum == -3){
-              return -1;
-            }
+          if (sum == 3) { return 1; }
+            else if (sum == -3){return -1; }
 
             // Check if there are no winners..
            else return 0;
@@ -103,23 +85,23 @@ class  Game extends Component {
     onCellPress =(row, column) => {
       
       // Don’t allow cell to change one more time
-      let val = this.state.gameState[row][column];
-      if (val !== 0){ return <View /> }
+      var val = this.state.gameState[row][column];
+      if (val !== 0){ return}
 
-      let currentPlayer = this.state.currentPlayer;
+      var currentPlayer = this.state.currentPlayer;
 
       // Set the cell to an a sign (X or O)
-      let arr = this.state.gameState.slice();
+      var arr = this.state.gameState.slice();
       arr[row][column] = currentPlayer;
       this.setState({gameState: arr});
 
       // Switch to next player
-      let nextPlayer = (currentPlayer == 1) ? -1  : 1
+      var nextPlayer = (currentPlayer == 1) ? -1  : 1
       this.setState({currentPlayer: nextPlayer})
 
       // Check for the winner player.. 
-      let winner = this.winnerPlayer();
-      if (winner == 1) {
+      var winner = this.winnerPlayer();
+      if (winner === 1) {
         Alert.alert("Player 1 is the WINNER 🏆🎉👏🏼");
         this.initializeGame();
       }
@@ -136,7 +118,7 @@ class  Game extends Component {
   }
 
 renderIcon=(row, column)=>{
-  let val = this.state.gameState[row][column];
+  var val = this.state.gameState[row][column];
   switch (val) {
     case 1: return  <IconX name='md-close' style={styles.cellX} />
     
