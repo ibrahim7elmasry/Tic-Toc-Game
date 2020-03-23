@@ -20,7 +20,8 @@ class  Game extends Component {
   constructor(props){
     super(props);
     this.state = {
-        gameState :[
+      toggle: true,
+      gameState :[
           [0, 0, 0],
           [0, 0, 0],
           [0, 0, 0]
@@ -129,28 +130,43 @@ renderIcon=(row, column)=>{
 }
 
 
+toggleTheme =()=>{
+  this.setState({
+    toggle: this.state.toggle ? false : true
+  })
+}
 
  render(){
  return (
    
-      <View style={styles.root}>
+    
+    <View style={[styles.root, { backgroundColor: this.state.toggle ? 'white' : '#262626' }]}>
+      <TouchableOpacity
+            onPress={()=>this.toggleTheme()}
+             style={{ borderWidth:1,backgroundColor:'#7733ff', justifyContent:'center', bottom:50, height:20,width:'50%' }}>
+
+              <Text style={{  textAlign:'center', fontSize:14, fontWeight:'bold',color:this.state.toggle ? 'black' : 'white'}}>Press here to active Dark Mode</Text>
+            </TouchableOpacity>
          <View  style={styles.container}>
+
+           
+  
 
         <TouchableOpacity 
             onPress = { ()=> this.onCellPress(0, 0)}
-            style={[styles.cell  ,{borderLeftWidth:0, borderTopWidth:0}]} >
+            style={[styles.cell  ,{  borderColor:this.state.toggle ? 'black' : 'white', borderLeftWidth:0, borderTopWidth:0}]} >
             {this.renderIcon(0, 0)}
         </TouchableOpacity>
 
           <TouchableOpacity
               onPress = {() => this.onCellPress(0, 1)}
-              style={[styles.cell, {borderTopWidth:0}]} >
+              style={[styles.cell, {borderTopWidth:0, borderColor:this.state.toggle ? 'black' : 'white', }]} >
               {this.renderIcon(0, 1)}
            </TouchableOpacity>
 
           <TouchableOpacity 
               onPress = {()=> this.onCellPress(0, 2)}
-              style={[styles.cell, {borderTopWidth:0, borderRightWidth:0}]} >
+              style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderTopWidth:0, borderRightWidth:0}]} >
               {this.renderIcon(0, 2)}
           </TouchableOpacity>
 
@@ -160,19 +176,19 @@ renderIcon=(row, column)=>{
 
           <TouchableOpacity 
             onPress = {()=> this.onCellPress(1, 0)}
-          style={[styles.cell, {borderLeftWidth:0}]} > 
+          style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderLeftWidth:0}]} > 
           {this.renderIcon(1, 0)}
           </TouchableOpacity>
 
           <TouchableOpacity 
               onPress = {()=> this.onCellPress(1, 1)}
-              style={[styles.cell, {borderTopWidth:0}]} > 
+              style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderTopWidth:0}]} > 
               {this.renderIcon(1, 1)}
           </TouchableOpacity>
 
           <TouchableOpacity 
               onPress = {()=> this.onCellPress(1, 2)}
-              style={[styles.cell, {borderTopWidth:0, borderRightWidth:0}]}> 
+              style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderTopWidth:0, borderRightWidth:0}]}> 
               {this.renderIcon(1, 2)}
           </TouchableOpacity>
           </View>
@@ -185,19 +201,19 @@ renderIcon=(row, column)=>{
 
           <TouchableOpacity
               onPress = {()=> this.onCellPress(2, 0)}
-              style={[styles.cell, {borderLeftWidth:0,borderBottomWidth:0 }]} >
+              style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderLeftWidth:0,borderBottomWidth:0 }]} >
               {this.renderIcon(2, 0)}
           </TouchableOpacity>
 
           <TouchableOpacity 
             onPress = {()=> this.onCellPress(2, 1)}
-            style={[styles.cell, {borderBottomWidth:0}]} >
+            style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderBottomWidth:0}]} >
             {this.renderIcon(2, 1)}
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress = {()=> this.onCellPress(2, 2)}
-            style={[styles.cell, {borderBottomWidth:0,  borderRightWidth:0}]} >
+            style={[styles.cell, {borderColor:this.state.toggle ? 'black' : 'white', borderBottomWidth:0,  borderRightWidth:0}]} >
             {this.renderIcon(2, 2)}
           </TouchableOpacity>
 
